@@ -22,7 +22,6 @@ THE SOFTWARE.
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"path"
@@ -50,15 +49,6 @@ func run() error {
 
 	cmd.Execute(p)
 	return nil
-}
-
-func usage() {
-	fmt.Printf(`
-usage: %s COMMAND <COMMAND_ARGS>
-	cd:		open project
-	add:	add a new project
-	delete:	delete a project
-`, os.Args[0])
 }
 
 func configFolder() (string, error) {

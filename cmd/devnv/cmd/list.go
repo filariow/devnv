@@ -22,6 +22,7 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -38,17 +39,32 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		fmt.Println("list called")
 		pp, err := p.List()
 		if err != nil {
 			return err
 		}
 
-		for _, p := range pp {
-			fmt.Printf("name: %s, folder: %s", p.Name(), p.Folder())
+		ppo := make([]projectOut, len(pp))
+		for i, p := range pp {
+			ppo[i] = projectOut{
+				Name:   p.Name(),
+				Folder: p.Folder(),
+			}
 		}
+
+		d, err := json.MarshalIndent(ppo, "", "  ")
+		if err != nil {
+			return err
+		}
+
+		fmt.Println(string(d))
 		return nil
 	},
+}
+
+type projectOut struct {
+	Name   string `json:"name"`
+	Folder string `json:"folder"`
 }
 
 func init() {
