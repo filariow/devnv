@@ -9,6 +9,7 @@ type PM interface {
 	Add(name, folder string) error
 	Delete(name string) error
 	List() ([]Project, error)
+	Get(name string) (Project, error)
 }
 
 type bashManager struct {
@@ -52,4 +53,8 @@ func (m *bashManager) Delete(name string) error {
 
 func (m *bashManager) List() ([]Project, error) {
 	return m.s.Get()
+}
+
+func (m *bashManager) Get(name string) (Project, error) {
+	return m.s.GetByName(name)
 }
