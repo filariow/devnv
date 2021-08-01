@@ -27,20 +27,30 @@ import (
 
 // cdCmd represents the cd command
 var cdCmd = &cobra.Command{
-	Use:   "cd",
-	Short: "Change directory to the project one",
-	Long:  `Change directory to the project one and execute .devnv init script.`,
+	Use:                   "cd",
+	Short:                 "Change directory to the project one",
+	Long:                  `Change directory to the project one and execute .devnv init script.`,
+	Args:                  cobra.ExactValidArgs(1),
+	ValidArgsFunction:     validArgs,
+	DisableFlagsInUseLine: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		pj, err := cmd.Flags().GetString("project")
-		if err != nil {
-			return err
-		}
-		return p.CD(pj)
+		return p.CD(args[0])
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(cdCmd)
+}
 
-	cdCmd.Flags().StringP("project", "p", "", "The project's name")
+func validArgs(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
+	ppj, err := p.List()
+	if err != nil {
+		return []string{}, cobra.ShellCompDirectiveError
+	}
+
+	pps := make([]string, len(ppj))
+	for i, pj := range ppj {
+		pps[i] = pj.Name()
+	}
+	return pps, cobra.ShellCompDirectiveNoFileComp
 }

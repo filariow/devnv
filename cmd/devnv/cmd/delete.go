@@ -27,19 +27,17 @@ import (
 
 // deleteCmd represents the delete command
 var deleteCmd = &cobra.Command{
-	Use:   "delete",
-	Short: "Delete the project",
-	Long:  `Delete the project.`,
+	Use:                   "delete",
+	Short:                 "Delete the project",
+	Long:                  `Delete the project.`,
+	Args:                  cobra.ExactValidArgs(1),
+	ValidArgsFunction:     validArgs,
+	DisableFlagsInUseLine: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		pj, err := cmd.Flags().GetString("project")
-		if err != nil {
-			return err
-		}
-		return p.Delete(pj)
+		return p.Delete(args[0])
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(deleteCmd)
-	deleteCmd.Flags().StringP("project", "p", "", "The project's name")
 }
