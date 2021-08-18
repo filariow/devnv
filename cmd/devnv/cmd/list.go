@@ -60,6 +60,7 @@ to quickly create a Cobra application.`,
 		fmt.Println(string(d))
 		return nil
 	},
+	Aliases: []string{"l"},
 }
 
 type projectOut struct {

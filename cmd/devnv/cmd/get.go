@@ -53,6 +53,7 @@ var getCmd = &cobra.Command{
 		fmt.Println(string(d))
 		return err
 	},
+	Aliases: []string{"g"},
 }
 
 func init() {

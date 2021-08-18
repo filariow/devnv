@@ -48,6 +48,7 @@ var addCmd = &cobra.Command{
 		}
 		return p.Add(pj, fa)
 	},
+	Aliases: []string{"a"},
 }
 
 func init() {

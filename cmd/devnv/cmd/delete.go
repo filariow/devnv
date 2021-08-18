@@ -36,6 +36,7 @@ var deleteCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return p.Delete(args[0])
 	},
+	Aliases: []string{"d"},
 }
 
 func init() {
