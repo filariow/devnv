@@ -63,7 +63,7 @@ func Execute(pmi pm.PM) {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.devenv.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.devnv.yaml)")
 }
 
 // initConfig reads in config file and ENV variables if set.

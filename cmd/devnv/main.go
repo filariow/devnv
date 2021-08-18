@@ -61,6 +61,6 @@ func configFolder() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	cf = path.Join(h, ".devenv")
+	cf = path.Join(h, ".devnv")
 	return cf, nil
 }
