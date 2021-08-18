@@ -29,7 +29,6 @@ import (
 var deleteCmd = &cobra.Command{
 	Use:                   "delete",
 	Short:                 "Delete the project",
-	Long:                  `Delete the project.`,
 	Args:                  cobra.ExactValidArgs(1),
 	ValidArgsFunction:     validArgs,
 	DisableFlagsInUseLine: true,

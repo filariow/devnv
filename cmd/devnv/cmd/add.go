@@ -31,7 +31,6 @@ import (
 var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Add a new project",
-	Long:  "Add a new project",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		pj, err := cmd.Flags().GetString("project")
 		if err != nil {

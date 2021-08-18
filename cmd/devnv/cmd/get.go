@@ -32,7 +32,6 @@ import (
 var getCmd = &cobra.Command{
 	Use:                   "get",
 	Short:                 "Get the project",
-	Long:                  `Get the project.`,
 	Args:                  cobra.ExactValidArgs(1),
 	ValidArgsFunction:     validArgs,
 	DisableFlagsInUseLine: true,

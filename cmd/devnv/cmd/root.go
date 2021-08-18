@@ -38,16 +38,19 @@ var cfgFile string
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "devnv",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
+	Short: "A simple development environment manager",
+	Long: `devnv saves project locations and helps you cd into projects folders and configure the 
+shell with respect to the selected project.
+When asked for changing directory, devnv will prompt bash code that you have to source.
+The code simply changes the directory (cd) and executes a script file (.devnv) if present.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+# to add a new project
+$ devnv add -f PROJ_FOLDER -p PROJ_NAME
+# to cd into PROJ_FOLDER and configure the shell
+$ devnv cd PROJ_NAME # inspect the code
+$ source <(devnv cd PROJ_NAME)
+
+you can use the "pm" tool for a simpler notation`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -60,15 +63,7 @@ func Execute(pmi pm.PM) {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.devenv.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 // initConfig reads in config file and ENV variables if set.
