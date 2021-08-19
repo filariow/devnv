@@ -52,7 +52,7 @@ func run() error {
 }
 
 func configFolder() (string, error) {
-	cf := os.Getenv("PM_CONFIGFOLDER")
+	cf := os.Getenv("DEVNV_CONFIGFOLDER")
 	if cf != "" {
 		return cf, nil
 	}
