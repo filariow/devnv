@@ -7,7 +7,7 @@ _pm() {
 
 if [ "$funcstack[1]" = "_pm" ]; then
     _pm
-else 
+else
     compdef '_pm' pm
 fi
 
