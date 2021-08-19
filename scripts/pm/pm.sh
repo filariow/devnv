@@ -12,7 +12,7 @@ else
 fi
 
 pm() {
-	l=$(devnv list | jq -r '.[].name' | sort | fzf -1 --ansi --preview 'devnv get {}' --info=inline --border -q "$1")
+	l=$(devnv list | jq -r '.[].name' | sort | fzf -1 --ansi --preview 'devnv get {} && echo "" && devnv script {}' --info=inline --border -q "$1")
 	source <(devnv cd $l)
 }
 
