@@ -6,6 +6,9 @@ PM_PATH = ${HOME}/.devnv/scripts/pm.sh
 
 all: build
 
+test:
+	@$(GO) test ./...
+
 build:
 	@$(GO) build -ldflags="-s -w" -trimpath  -o bin/devnv ./cmd/devnv/main.go
 
