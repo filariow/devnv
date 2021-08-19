@@ -31,7 +31,7 @@ func (m *bashManager) CD(project string) error {
 
 cd %s
 fname=".devnv"
-[ -f ${fname} ] && source ${fname} || true
+[ -f ${fname} ] && [ -z ${DEVNV_NOSOURCE} ] && source ${fname} || true
 `
 
 	s := fmt.Sprintf(f, p.Folder())
