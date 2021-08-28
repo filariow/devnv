@@ -24,6 +24,7 @@ package cmd
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path"
 
 	"github.com/spf13/cobra"
@@ -43,6 +44,18 @@ var scriptCmd = &cobra.Command{
 		}
 
 		sf := path.Join(pj.Folder(), ".devnv")
+		fi, err := os.Stat(sf)
+		if os.IsNotExist(err) {
+			fmt.Printf("'%s' file does not exists", sf)
+			return nil
+		}
+
+		if fi.IsDir() {
+			m := fmt.Sprintf("'%s' is a directory", sf)
+			fmt.Println(m)
+			return nil
+		}
+
 		f, err := ioutil.ReadFile(sf)
 		if err != nil {
 			fmt.Printf("Error reading file: %s", err)
