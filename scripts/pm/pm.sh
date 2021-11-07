@@ -11,8 +11,18 @@ else
     compdef '_pm' pm
 fi
 
+__choices() {
+    l=`devnv list | jq -r '.[].name' | sort`
+    o=`echo $l | grep -E "^$1$"`
+    if [ ! -z $o ]; then
+        echo "$o"
+        return
+    fi
+    echo "$l"
+}
+
 pm() {
-	l=$(devnv list | jq -r '.[].name' | sort | fzf -1 --ansi --preview 'devnv get {} && echo "" && devnv script {}' --info=inline --border -q "$1")
+    l=$(__choices "$1" | sort | fzf -1 --ansi --preview 'devnv get {} && echo "" && devnv script {}' --info=inline --border -q "$1")
 	source <(devnv cd $l)
 }
 
